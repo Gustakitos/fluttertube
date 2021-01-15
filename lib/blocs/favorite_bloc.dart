@@ -14,6 +14,8 @@ class FavoriteBloc implements BlocBase {
 
   FavoriteBloc() {
     SharedPreferences.getInstance().then((prefs) {
+      print('favorites:');
+      print(prefs);
       if (prefs.getKeys().contains("favorites")) {
         _favorites = json.decode(prefs.getString("favorites")).map((k, v) {
           return MapEntry(k, Video.fromJson(v));
@@ -24,7 +26,7 @@ class FavoriteBloc implements BlocBase {
     });
   }
 
-  void toggleFavotire(Video video) {
+  void toggleFavorite(Video video) {
     if (_favorites.containsKey(video.id))
       _favorites.remove(video.id);
     else
@@ -38,6 +40,11 @@ class FavoriteBloc implements BlocBase {
   void _saveFav() {
     SharedPreferences.getInstance().then((prefs) {
       prefs.setString("favorites", json.encode(_favorites));
+    });
+
+    SharedPreferences.getInstance().then((prefs) {
+      print('favorites after save:');
+      print(prefs);
     });
   }
 

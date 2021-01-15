@@ -16,7 +16,7 @@ class Video {
       );
     else
       return Video(
-        id: json["id"]["videoId"],
+        id: json["videoId"],
         title: json["title"],
         thumb: json["thumb"],
         channel: json["channel"],
